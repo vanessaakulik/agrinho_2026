@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agro Inteligente</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* =========================
+       ESTILOS BÁSICOS
+    ========================== */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8f2;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header, footer {
+      text-align: center;
+      background: #2c7a2c;
+      color: white;
+      padding: 1em 0;
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #2c7a2c;
+      color: white;
+      cursor: pointer;
+      border: none;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #1f5c1f;
+    }
+
+    #resultadoCalagem, #resultadoClima {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* =========================
+       ANIMAÇÃO DE TEMPO
+    ========================== */
+    .clima-icone {
+      font-size: 3em;
+    }
+
+    /* =========================
+       SEÇÃO EXTRA: DICAS AGRÍCOLAS
+    ========================== */
+    .dicas li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🌱 Agro Inteligente</h1>
+  </header>
+
+  <main class="container">
+
+    <!-- =========================
+         CALCULADORA DE CALAGEM
+    ========================== -->
+    <section class="card" aria-labelledby="titulo-calagem">
+      <h2 id="titulo-calagem">Calculadora de Calagem</h2>
+      <form id="formCalagem" onsubmit="calcularCalagem(event)">
+        <label for="ph">Digite o pH do solo:</label>
+        <input type="number" id="ph" name="ph" placeholder="Ex: 5.5" required step="0.1" min="0" max="14">
+        <button type="submit">Calcular</button>
+      </form>
+      <div id="resultadoCalagem" role="status" aria-live="polite"></div>
+    </section>
+
+    <!-- =========================
+         PREVISÃO DO TEMPO
+    ========================== -->
+    <section class="card" aria-labelledby="titulo-clima">
+      <h2 id="titulo-clima">🌦 Previsão do Tempo</h2>
+      <form id="formClima" onsubmit="buscarClima(event)">
+        <label for="cidade">Digite sua cidade:</label>
+        <input type="text" id="cidade" name="cidade" placeholder="Ex: São Paulo" required>
+        <button type="submit">Buscar Clima</button>
+      </form>
+      <div id="resultadoClima" role="status" aria-live="polite"></div>
+      <div id="iconeClima" class="clima-icone"></div>
+    </section>
+
+    <!-- =========================
+         SEÇÃO EXTRA: DICAS AGRÍCOLAS
+    ========================== -->
+    <section class="card" aria-labelledby="titulo-dicas">
+      <h2 id="titulo-dicas">💡 Dicas do Dia</h2>
+      <ul class="dicas" id="dicas">
+        <li>Plante culturas resistentes à seca se a previsão indicar baixa chuva.</li>
+        <li>Verifique o pH do solo antes de adubar.</li>
+        <li>Use cobertura vegetal para evitar erosão.</li>
+        <li>Registre o clima diário para melhorar o planejamento agrícola.</li>
+      </ul>
+      <button onclick="gerarDica()">Gerar Nova Dica</button>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Agro Inteligente. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // =========================
+    // CALCULADORA DE CALAGEM
+    // =========================
+    function calcularCalagem(event) {
+      event.preventDefault();
+      const ph = parseFloat(document.getElementById('ph').value);
+      let resultado = '';
+      
+      if(ph < 5.5) {
+        resultado = 'O solo está ácido. Recomenda-se aplicar calcário.';
+      } else if(ph <= 6.5) {
+        resultado = 'O solo está ideal para a maioria das culturas.';
+      } else {
+        resultado = 'O solo está alcalino. Cuidado com excesso de calagem.';
+      }
+
+      document.getElementById('resultadoCalagem').textContent = resultado;
+    }
+
+    // =========================
+    // PREVISÃO DO TEMPO SIMULADA
+    // =========================
+    function buscarClima(event) {
+      event.preventDefault();
+      const cidade = document.getElementById('cidade').value;
+      const resultado = document.getElementById('resultadoClima');
+      const icone = document.getElementById('iconeClima');
+
+      // Simulação de clima aleatório
+      const climas = [
+        {desc: 'Ensolarado', emoji: '☀️'},
+        {desc: 'Nublado', emoji: '☁️'},
+        {desc: 'Chuvoso', emoji: '🌧️'},
+        {desc: 'Tempestade', emoji: '⛈️'},
+        {desc: 'Neve', emoji: '❄️'}
+      ];
+      const clima = climas[Math.floor(Math.random() * climas.length)];
+
+      resultado.textContent = `Clima em ${cidade}: ${clima.desc}`;
+      icone.textContent = clima.emoji;
+    }
+
+    // =========================
+    // GERAR DICA ALEATÓRIA
+    // =========================
+    const dicasList = [
+      'Faça rotação de culturas para melhorar a fertilidade do solo.',
+      'Use irrigação eficiente para economizar água.',
+      'Acompanhe o calendário agrícola da sua região.',
+      'Proteja as plantas de pragas com métodos naturais.'
+    ];
+
+    function gerarDica() {
+      const dica = dicasList[Math.floor(Math.random() * dicasList.length)];
+      document.getElementById('dicas').innerHTML = `<li>${dica}</li>`;
+    }
+  </script>
+</body>
+
+</html>

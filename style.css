@@ -1,0 +1,365 @@
+/* =========================
+   VARIÁVEIS
+========================= */
+:root {
+  --verde-1: #1b4332;
+  --verde-2: #2d6a4f;
+  --verde-3: #40916c;
+  --verde-4: #52b788;
+
+  --sucesso: #27ae60;
+  --alerta: #f39c12;
+  --erro: #e74c3c;
+
+  --branco: #ffffff;
+  --cinza: #f4f4f4;
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+  font-family: "Segoe UI", sans-serif;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--verde-1),
+      var(--verde-2),
+      var(--verde-3)
+    );
+
+  min-height: 100vh;
+
+  padding: 30px;
+
+  transition: 0.4s;
+}
+
+/* =========================
+   MODO ESCURO
+========================= */
+body.dark {
+  background:
+    linear-gradient(
+      135deg,
+      #0d1117,
+      #161b22,
+      #21262d
+    );
+
+  color: white;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+/* =========================
+   TÍTULO
+========================= */
+h1 {
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+
+  font-size: 3rem;
+
+  text-shadow:
+    0 5px 15px rgba(0,0,0,.3);
+}
+
+/* =========================
+   CARDS
+========================= */
+.card {
+
+  background:
+    rgba(255,255,255,.9);
+
+  backdrop-filter: blur(12px);
+
+  border-radius: 25px;
+
+  padding: 25px;
+
+  margin-bottom: 25px;
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.15);
+
+  transition: .3s;
+}
+
+.dark .card {
+  background:
+    rgba(30,30,30,.9);
+}
+
+.card:hover {
+  transform:
+    translateY(-6px);
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.25);
+}
+
+/* =========================
+   INPUTS
+========================= */
+input {
+
+  width: 100%;
+
+  padding: 15px;
+
+  border-radius: 12px;
+
+  border: 2px solid #ddd;
+
+  margin-bottom: 15px;
+
+  font-size: 16px;
+
+  transition: .3s;
+}
+
+input:focus {
+
+  outline: none;
+
+  border-color:
+    var(--verde-3);
+
+  box-shadow:
+    0 0 15px rgba(82,183,136,.4);
+}
+
+/* =========================
+   BOTÕES
+========================= */
+button {
+
+  width: 100%;
+
+  padding: 15px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      45deg,
+      var(--verde-2),
+      var(--verde-4)
+    );
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+button:hover {
+  transform:
+    translateY(-2px);
+
+  filter: brightness(1.1);
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+/* =========================
+   RESULTADOS
+========================= */
+#resultadoClima,
+#resultadoCalagem {
+
+  margin-top: 20px;
+
+  padding: 20px;
+
+  border-radius: 15px;
+
+  background: #f7fdf8;
+
+  animation:
+    aparecer .4s ease;
+}
+
+.dark #resultadoClima,
+.dark #resultadoCalagem {
+  background: #222;
+}
+
+/* =========================
+   CARD CLIMA
+========================= */
+.card-clima {
+  text-align: center;
+}
+
+.card-clima img {
+  width: 100px;
+}
+
+.card-clima h2 {
+  color: var(--verde-2);
+  margin-bottom: 15px;
+}
+
+/* =========================
+   BARRA PH
+========================= */
+.barra-ph {
+
+  width: 100%;
+
+  height: 25px;
+
+  background: #ddd;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  margin-top: 15px;
+}
+
+.progresso-ph {
+
+  height: 100%;
+
+  transition: 1s;
+}
+
+/* =========================
+   LOADING
+========================= */
+.spinner {
+
+  width: 50px;
+  height: 50px;
+
+  border: 5px solid #ddd;
+
+  border-top:
+    5px solid var(--verde-3);
+
+  border-radius: 50%;
+
+  margin: auto;
+
+  animation:
+    girar 1s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================
+   BADGES
+========================= */
+.badge {
+
+  display: inline-block;
+
+  padding: 8px 12px;
+
+  border-radius: 30px;
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  color: white;
+}
+
+.sucesso {
+  background: var(--sucesso);
+}
+
+.alerta {
+  background: var(--alerta);
+}
+
+.erro {
+  background: var(--erro);
+}
+
+/* =========================
+   HISTÓRICO
+========================= */
+.historico ul {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.historico li {
+
+  padding: 8px;
+
+  border-bottom:
+    1px solid #ddd;
+}
+
+/* =========================
+   ANIMAÇÕES
+========================= */
+@keyframes aparecer {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  button,
+  input {
+    font-size: 15px;
+  }
+}
